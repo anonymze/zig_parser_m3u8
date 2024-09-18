@@ -79,7 +79,7 @@ fn fetchFile(url: []const u8, allocator: std.mem.Allocator, forced_header: ?[]co
     const uri = try Uri.parse(url);
 
     // URL is valid so we start creating the buffer_url allocation needed for the header (2 MegaBytes here)
-    const buff = try allocator.alloc(u8, 1024 * 1024 * 4);
+    const buff = try allocator.alloc(u8, 1024 * 1024 * 2);
     defer allocator.free(buff);
 
     // open a connection
@@ -112,7 +112,7 @@ fn fetchFile(url: []const u8, allocator: std.mem.Allocator, forced_header: ?[]co
     try std.testing.expectEqual(req.response.status, .ok);
 
     var readerBody = req.reader();
-    const body = try readerBody.readAllAlloc(allocator, 1024 * 1024 * 8);
+    const body = try readerBody.readAllAlloc(allocator, 1024 * 1024 * 4);
 
     return body;
 }
