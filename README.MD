@@ -1,4 +1,4 @@
-# PARSE A .m3u8 METADATA FILE AND DOWNLOAD AND MERGE ALL THE TRANSPORT VIDEO STREAMING FILES ASSOCIATED
+# Parse a .m3u8 metadata file then download and merge all the transport video streaming files associated
 
 ## BUILD
 
