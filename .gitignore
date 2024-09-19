@@ -1,4 +1,7 @@
 .history/
 .vscode/
 .zig-cache/
+
 zig-out/
+output.mp4
+file.txt
