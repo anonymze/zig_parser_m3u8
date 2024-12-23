@@ -8,8 +8,11 @@ const eql = std.mem.eql;
 const print = std.debug.print;
 const expect = std.testing.expect;
 
-const BASE_URL = "https://mayi22140.mayicloud.com/files/aa/";
-const FILE = "kYo4hQwhOQOF7UvF8LSDcJb6xP3wVBKfA8k.m3u8";
+const BASE_URL = "https://s1.oneupload.to/hls2/02/00067/snvbvmae4d48_h/";
+const FILE = "index-v1-a1.m3u8?t=C6W8EdQbbeuDyaUAf8CyIvwdl4h9V7SRmVLpJ35Fq6g&s=1734986661&e=28800&f=336196&i=0.0&sp=0";
+// '.ts'
+// const END_OF_URL_TO_FIND = [3]u8{ 46, 116, 115 };
+const END_OF_URL_TO_FIND = [3]u8{ 112, 61, 48 };
 const HEADER_TYPE = "application/vnd.apple.mpegurl";
 const FFMPEG_COMMAND = [_][]const u8{ "ffmpeg", "-protocol_whitelist", "file,http,https,tcp,tls,crypto", "-f", "concat", "-safe", "0", "-i", "file.txt", "-c", "copy", "output.mp4" };
 
@@ -47,8 +50,8 @@ fn readContentFile(body: []u8, allocator: Allocator) ![][]u8 {
 
     for (body[2..], 2..) |character, idx| {
 
-        // '.' , 't', 's'
-        if (body[idx - 2] == 46 and body[idx - 1] == 116 and character == 115) {
+        // '.' , 't', 's' generally but can change
+        if (body[idx - 2] == END_OF_URL_TO_FIND[0] and body[idx - 1] == END_OF_URL_TO_FIND[1] and character == END_OF_URL_TO_FIND[2]) {
             var count: u8 = 0;
 
             while (body[idx - count] != 10 and idx >= count) {
@@ -165,7 +168,10 @@ fn createFileAndPopulate(content: [][]u8, allocator: Allocator) !void {
         std.mem.copyForwards(u8, buffer_url[BASE_URL.len..], file);
 
         try writer.writeAll("file '");
-        try writer.writeAll(buffer_url);
+        // if url is not integrated
+        // try writer.writeAll(buffer_url);
+        // other wise
+        // try writer.writeAll(file);
         try writer.writeAll("'\n");
 
         allocator.free(buffer_url);
