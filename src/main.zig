@@ -8,6 +8,10 @@ const eql = std.mem.eql;
 const print = std.debug.print;
 const expect = std.testing.expect;
 
+// https://stream.mux.com/RQdRV01WzP8bdL01K73lM2c1nZ9psHt01GWFHycFS5imV4.m3u8?max_resolution=2160p&min_resolution=540p&redundant_streams=true
+// blob:https://www.aihero.dev/c910516e-9a87-47a8-aaa1-f2a1cc7e44d4
+
+
 const BASE_URL = "https://s1.oneupload.to/hls2/02/00067/snvbvmae4d48_h/";
 const FILE = "index-v1-a1.m3u8?t=C6W8EdQbbeuDyaUAf8CyIvwdl4h9V7SRmVLpJ35Fq6g&s=1734986661&e=28800&f=336196&i=0.0&sp=0";
 // '.ts'
